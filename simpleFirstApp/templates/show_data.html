@@ -1,0 +1,109 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+Show Data
+{% endblock title %}
+
+{% block custom_css %}
+<style>
+    .bg_blue {
+        padding:10px;
+        background: dodgerblue;
+        border-radius: 10px;
+        border-shadow: 3px 3px 3px grey;
+        text-align: center;
+    }
+    .custom-block {
+        padding: 10px;
+    }
+</style>
+{% endblock custom_css %}
+
+{% block bodydata %}
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endif %}
+                {% if message.tags == 'error' %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm custom-block">
+            <h2 class="bg_blue">All Students</h2>
+            <div class="table-responsive">
+                <table class="table">
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Standard</th>
+                    <th>Hobbies</th>
+                    <th>Roll No.</th>
+                    <th>Bio</th>
+                    <th>Profile</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    {% for student in students %}
+                    <tr>
+                        <td>{{ student.id }}</td>
+                        <td>{{ student.name }}</td>
+                        <td>{{ student.email }}</td>
+                        <td>{{ student.standard }}</td>
+                        <td>{{ student.hobbies }}</td>
+                        <td>{{ student.roll_no }}</td>
+                        <td>{{ student.bio }}</td>
+                        <td>
+                            <img src="/media/{{ student.profile_image }}" style="width:150px;heigth:200px" alt="">
+                        </td>
+                        <td>{{ student.created_at }}</td>
+                        <td>
+                            <a href="/delete_student/{{ student.id }}" class="btn btn-danger">Delete</a><br>
+                            <a href="/update_student/{{ student.id }}" class="btn btn-success">Update</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div class="col-sm custom-block">
+            <h2 class="bg_blue">All Teachers</h2>
+            <div class="table-responsive">
+                <table class="table">
+                <thead>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                </thead>
+                <tbody>
+                    {% for teacher in teachers %}
+                    <tr>
+                        <td>{{ teacher.id }}</td>
+                        <td>{{ teacher.name }}</td>
+                        <td>{{ teacher.email }}</td>
+                        <td>{{ teacher.department }}</td>
+                        <td>{{ teacher.created_at }}</td>
+                        <td>
+                            <a href="/delete_teacher/{{ teacher.id }}" class="btn btn-danger">Delete</a><br>
+                            <a href="/update_teacher/{{ teacher.id }}" class="btn btn-success">Update</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock bodydata %}
