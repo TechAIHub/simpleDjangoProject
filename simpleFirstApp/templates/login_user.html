@@ -1,0 +1,59 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+Login
+{% endblock title %}
+
+{% block custom_css %}
+<style>
+    .bg_blue {
+        padding:10px;
+        background: dodgerblue;
+        border-radius: 10px;
+        border-shadow: 3px 3px 3px grey;
+        text-align: center;
+        color: #ffffff;
+    }
+    .form-area {
+        padding: 10px;
+    }
+</style>
+{% endblock custom_css %}
+
+{% block bodydata %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-3 form-area">
+            <h2 class="bg_blue">Login</h2>
+            <form action="/do_login_user" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="" class="control-label">Username : </label>
+                    <input type="text" name="username" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="" class="control-label">Password : </label>
+                    <input type="password" name="password" class="form-control">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success btn-block">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm">
+            {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endif %}
+                {% if message.tags == 'error' %}
+                    <div class="alert alert-danger">{{ message }}</div>
+                {% endif %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock bodydata %}

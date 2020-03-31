@@ -9,7 +9,7 @@
     5. python3 manage.py migrate
     6. python3 manage.py createsuperuser
 
-## Part 2: 
+## Part 2: URL Routing
     1. How to Create Urls in Djnago
     2. How to Create URL PATH in Django
     3. How to Pass Object to Template Django
@@ -51,3 +51,17 @@
     5. How to Delete Data in Django
     6. CRUD Operation Django Example
     7. Django CRUD SQL Tutorial
+    
+## Part 6: Register & Login User | Protected Views
+    1. How to Create Register Page in Django
+    2. How to Create Register Functionality in Django
+    3. How to Create Login Page in Django
+    4. How to Create Login Functionality in Django
+    5. Django AUTH User
+    6. How to Access Auth User in Template
+    7. How to Access Auth User in Views
+    8. How to Create Protected View in Django
+    9. Django Custom Login Page
+    10. Django User Registration Tutorial
+    11. Django Login View
+    12. Django Login and Signup Source Code

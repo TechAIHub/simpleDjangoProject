@@ -1,4 +1,6 @@
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django.core.files.storage import FileSystemStorage
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
@@ -167,3 +169,51 @@ def edit_teacher(request):
             return HttpResponseRedirect("update_teacher/"+str(teacher.id)+"")
         else:
             return HttpResponse('Teacher not found')
+
+
+def RegisterUser(request):
+    return render(request, 'register_user.html')
+
+
+def SaveUser(request):
+    if request.method != 'POST':
+        return HttpResponse('<h2>Method not Allowed</h2>')
+    else:
+        username = request.POST.get('username', '')
+        email = request.POST.get('email', '')
+        password = request.POST.get('password', '')
+
+        if not (User.objects.filter(username=username).exists() or User.objects.filter(email=email).exists()):
+            User.objects.create_user(username,email,password)
+            messages.success(request, 'User Created Successfully!')
+            return HttpResponseRedirect('/register_user')
+        else:
+            messages.error(request, 'Email or Username Already Exist!')
+            return HttpResponseRedirect('/register_user')
+
+
+def LoginUser(request):
+    return render(request, 'login_user.html')
+
+def DoLoginUser(request):
+    if request.method != 'POST':
+        return HttpResponse('<h2>Method not Allowed</h2>')
+    else:
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        user=authenticate(username=username, password=password)
+        login(request,user)
+
+        if user != None:
+            return HttpResponseRedirect('/homePage')
+        else:
+            messages.error(request, 'Invald login details!')
+            return HttpResponseRedirect('/login_user')
+
+def Logout(request):
+    logout()
+    return HttpResponseRedirect('/login_user')
+
+
+def HomePage(request):
+    return render(request, 'home_page.html')

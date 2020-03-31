@@ -1,0 +1,29 @@
+{% extends 'base_template.html' %}
+
+{% block title %}
+Home page
+{% endblock title %}
+
+{% block custom_css %}
+<style>
+    .custom-block {
+        padding: 10px;
+    }
+</style>
+{% endblock custom_css %}
+
+{% block bodydata %}
+<div class="container">
+    <div class="row custom-block">
+        <div class="col-sm">
+            <a href="/addData" class="btn btn-info btn-block">Add Data</a>
+        </div>
+        <div class="col-sm">
+            <a href="/show_all_data" class="btn btn-info btn-block">Show All Data</a>
+        </div>
+        <div class="col-sm">
+            <a href="/logout" class="btn btn-info btn-block">Logout</a>
+        </div>
+    </div>
+</div>
+{% endblock bodydata %}
